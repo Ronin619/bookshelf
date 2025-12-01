@@ -1,4 +1,5 @@
 
+
 let books = [
   {
     title: 'Harry Potter',
@@ -52,6 +53,8 @@ const addBooks = (data) => {
 document.querySelector('.search').addEventListener('click', function () {
   const search = document.querySelector('#search-query').value;
 
+  document.querySelector(".spinner").style.display = "block";
+
   fetchBooks(search);
 
   document.querySelector('#search-query').value = '';
@@ -64,6 +67,11 @@ let fetchBooks = (query) => {
     dataType: 'json'
   })
     .then(data => data.json())
+    .then(data => {    
+      document.querySelector(".spinner").style.display = "none";
+
+      return data;
+}) 
     .then(data => addBooks(data));
 }
 
